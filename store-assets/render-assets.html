@@ -26,14 +26,15 @@
 </style>
 </head>
 <body>
-  <h1>업글 타이머 v2.0 — Galaxy Store 제출용 자산</h1>
+  <h1>업글 타이머 v2.0 — 스토어 제출용 자산</h1>
   <p class="intro">
     각 자산 옆 <b>PNG 다운로드</b> 버튼을 누르면 해당 PNG 파일이 다운로드됩니다.<br>
-    Galaxy Store 셀러 포털에 그대로 업로드하시면 됩니다.<br>
+    <b>Google Play</b>: 아이콘(512²) + 피처 그래픽(1024×500) + 스크린샷 4장 사용.<br>
+    Galaxy Store용 1280×720 피처도 같이 들어 있어서 나중에 쓸 일 있으면 그대로 사용 가능.<br>
     한 번에 받으려면 맨 위 <b>전체 다운로드</b> 버튼.
   </p>
 
-  <button class="download-all" onclick="downloadAll()">전체 다운로드 (8개 파일)</button>
+  <button class="download-all" onclick="downloadAll()">전체 다운로드 (7개 파일)</button>
 
   <div class="grid">
 
@@ -56,9 +57,53 @@
       <button onclick="dl('svg-icon','icon-512.png',512,512)">PNG 다운로드</button>
     </div>
 
-    <!-- FEATURE 1280x720 -->
+    <!-- FEATURE 1024x500 (Google Play) -->
     <div class="asset">
-      <h2>피처 그래픽 (배너)</h2>
+      <h2>피처 그래픽 — Google Play용</h2>
+      <div class="dim">1024 × 500 PNG · feature-1024x500.png</div>
+      <div class="preview">
+        <svg id="svg-feature-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 500" width="1024" height="500">
+          <defs>
+            <linearGradient id="bg-play" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#0E0E10"/>
+              <stop offset="1" stop-color="#1B1C1E"/>
+            </linearGradient>
+            <path id="bp-play" d="M 145,330 A 140,140 0 0 1 285,330"/>
+          </defs>
+          <rect width="1024" height="500" fill="url(#bg-play)"/>
+
+          <!-- bubble on left -->
+          <g transform="translate(215,250)">
+            <circle r="172" fill="#111212" stroke="#000" stroke-width="14"/>
+            <circle r="140" fill="none" stroke="#363A3A" stroke-width="12"/>
+            <circle r="140" fill="none" stroke="#50EBDB" stroke-width="12"
+                    stroke-linecap="round" stroke-dasharray="880" stroke-dashoffset="380"
+                    transform="rotate(-90)"/>
+            <circle cx="129" cy="70" r="6" fill="rgba(255,222,74,0.4)"/>
+            <circle cx="-129" cy="70" r="6" fill="#FFDE4A"/>
+            <text y="-60" text-anchor="middle" fill="#50EBDB" font-size="32" font-weight="900">실행</text>
+            <text y="14" text-anchor="middle" fill="#fff" font-size="84" font-weight="900" font-family="sans-serif">15:00</text>
+            <text y="56" text-anchor="middle" fill="#FFDE4A" font-size="40" font-weight="900">05:00</text>
+            <text fill="rgba(80,235,219,0.85)" font-size="22" font-weight="800" letter-spacing="2">
+              <textPath href="#bp-play" startOffset="50%" text-anchor="middle">upgul</textPath>
+            </text>
+          </g>
+
+          <!-- right side text -->
+          <text x="450" y="170" fill="#50EBDB" font-size="18" font-weight="800" letter-spacing="5">UPGUL</text>
+          <text x="450" y="240" fill="#FFFFFF" font-size="60" font-weight="900">업글 타이머</text>
+          <text x="450" y="290" fill="#d6d8da" font-size="22" font-weight="500">시간을 주도하는 사람을 위한 앱</text>
+          <text x="450" y="350" fill="#9A9DA0" font-size="16">유튜브·게임 위에 떠 있는 동그라미</text>
+          <text x="450" y="378" fill="#9A9DA0" font-size="16">전체 + 부분 사이클 자동 반복 알람</text>
+          <text x="450" y="406" fill="#9A9DA0" font-size="16">탭 한 번으로 알람 끄기</text>
+        </svg>
+      </div>
+      <button onclick="dl('svg-feature-play','feature-1024x500.png',1024,500)">PNG 다운로드</button>
+    </div>
+
+    <!-- FEATURE 1280x720 (Galaxy Store backup) -->
+    <div class="asset">
+      <h2>피처 그래픽 — Galaxy Store용 (백업)</h2>
       <div class="dim">1280 × 720 PNG · feature-1280x720.png</div>
       <div class="preview">
         <svg id="svg-feature" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
@@ -301,6 +346,7 @@ function dl(svgId, filename, w, h) {
 async function downloadAll() {
   const items = [
     ['svg-icon','icon-512.png',512,512],
+    ['svg-feature-play','feature-1024x500.png',1024,500],
     ['svg-feature','feature-1280x720.png',1280,720],
     ['svg-shot1','screenshot-1-bubble.png',1080,2340],
     ['svg-shot2','screenshot-2-cycles.png',1080,2340],
