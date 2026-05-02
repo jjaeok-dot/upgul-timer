@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="theme-color" content="#0E0E10" />
+  <title>업글 타이머 — 시간을 주도하는 사람을 위한 앱</title>
+  <meta property="og:title" content="업글 타이머" />
+  <meta property="og:description" content="시간을 주도하는 사람을 위한 안드로이드 오버레이 타이머" />
+  <meta property="og:type" content="website" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #0E0E10;
+      color: #F2F2F2;
+      font-family: 'Noto Sans KR', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .brand-mark {
+      width: 12px;
+      height: 12px;
+      background: #50EBDB;
+      border-radius: 3px;
+    }
+    .brand-name {
+      font-weight: 800;
+      color: #50EBDB;
+      letter-spacing: 4px;
+      font-size: 13px;
+    }
+    .brand-version {
+      margin-left: auto;
+      font-size: 11px;
+      color: #6c6f73;
+      letter-spacing: 0.5px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .tagline {
+      margin: 0 0 36px;
+      font-size: 17px;
+      color: #b8bbbe;
+    }
+
+    .hero {
+      background: #1B1C1E;
+      border-radius: 24px;
+      padding: 32px 28px;
+      display: grid;
+      gap: 22px;
+      justify-items: center;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .qr-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px;
+      display: inline-block;
+    }
+    .qr-box img { display: block; width: 200px; height: 200px; }
+    .qr-caption { color: #9A9DA0; font-size: 13px; }
+    .download {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #50EBDB;
+      color: #0A1414;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 17px;
+      padding: 16px 36px;
+      border-radius: 14px;
+      transition: transform .12s ease;
+    }
+    .download:active { transform: scale(0.97); }
+    .size-tag { color: #6c6f73; font-size: 12px; margin-top: -8px; }
+
+    section { margin-bottom: 32px; }
+    h2 { font-size: 18px; margin: 0 0 14px; color: #50EBDB; letter-spacing: 0.3px; }
+    ul { padding-left: 18px; margin: 0; }
+    ul li { margin-bottom: 8px; color: #d6d8da; }
+    ul li b { color: #fff; font-weight: 700; }
+
+    .step {
+      background: #1B1C1E;
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 14px;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #50EBDB;
+      color: #0A1414;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+    .step-body { flex: 1; }
+    .step b { color: #fff; }
+    .step .hint { display: block; color: #9A9DA0; font-size: 13px; margin-top: 4px; }
+
+    .footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #2a2b2d;
+      color: #6c6f73;
+      font-size: 12px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .url-display {
+      background: #1B1C1E;
+      color: #50EBDB;
+      font-family: Consolas, 'Courier New', monospace;
+      font-size: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      word-break: break-all;
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    .preview-bubble {
+      width: 132px;
+      height: 132px;
+      position: relative;
+      margin: 0 auto;
+    }
+    .preview-bubble svg { width: 100%; height: 100%; }
+    .ring-rotate { transform-origin: 50% 50%; transform: rotate(-90deg); }
+    .preview-text {
+      position: absolute;
+      left: 0; right: 0;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      font-weight: 900;
+    }
+    .preview-status { top: 22px; color: #50EBDB; font-size: 12px; }
+    .preview-total  { top: 44px; color: #fff; font-size: 31px; line-height: 1; }
+    .preview-partial{ top: 79px; color: #FFDE4A; font-size: 16px; }
+    .brand-text { fill: rgba(80,235,219,0.9); font-weight: 800; font-size: 9px; letter-spacing: 0.4px; }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 30px; }
+      .hero { padding: 28px 20px; }
+      .qr-box img { width: 180px; height: 180px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand-row">
+      <span class="brand-mark"></span>
+      <span class="brand-name">UPGUL</span>
+      <span class="brand-version">v1.6</span>
+    </div>
+
+    <h1>업글 타이머</h1>
+    <p class="tagline">시간을 주도하는 사람을 위한 안드로이드 앱</p>
+
+    <div class="preview-bubble" aria-hidden="true">
+      <svg viewBox="0 0 132 132">
+        <g class="ring-rotate">
+          <circle cx="66" cy="66" r="61" fill="#111212" stroke="#000" stroke-width="5"/>
+          <circle cx="66" cy="66" r="52" fill="none" stroke="#363a3a" stroke-width="4"/>
+          <circle cx="66" cy="66" r="52" fill="none" stroke="#50EBDB" stroke-width="4"
+                  stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="88"/>
+        </g>
+        <defs><path id="bp" d="M 40,111 A 52,52 0 0 1 92,111" /></defs>
+        <text class="brand-text"><textPath href="#bp" startOffset="50%" text-anchor="middle">upgul</textPath></text>
+      </svg>
+      <div class="preview-text preview-status">실행</div>
+      <div class="preview-text preview-total">23:40</div>
+      <div class="preview-text preview-partial">03:40</div>
+    </div>
+
+    <div class="hero" style="margin-top: 28px;">
+      <a class="download" href="./overlay-timer.apk" download>
+        <span>📥</span><span>APK 받기</span>
+      </a>
+      <div class="size-tag">overlay-timer.apk · 약 23 KB</div>
+
+      <div style="height: 1px; background: #2a2b2d; width: 80%; margin: 6px 0;"></div>
+
+      <div class="qr-box"><img id="qr" alt="이 페이지 QR" /></div>
+      <div class="qr-caption">옆 사람에게 보낼 때 — QR 찍으면 이 페이지 열립니다</div>
+    </div>
+
+    <section>
+      <h2>이런 점이 다릅니다</h2>
+      <ul>
+        <li>화면 어디든 떠 있는 <b>작은 동그라미 타이머</b> — 유튜브, 게임, 어떤 앱 위에든</li>
+        <li><b>전체 시간 + 부분 시간 동시 표시</b> — 큰 흐름과 짧은 단위를 함께 봄</li>
+        <li>부분 알람 (가벼운 차임) / 최종 알람 (묵직한 경보) <b>두 톤이 다름</b></li>
+        <li>알람 울릴 때 <b>동그라미 한 번 누르면 즉시 멈춤</b></li>
+        <li>드래그로 위치 이동, 길게 누르면 설정 화면</li>
+        <li>어두운 테마 / 깔끔한 카드형 설정</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>설치 방법 (안드로이드 8 이상)</h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <b>위 "APK 받기" 버튼을 누르세요</b>
+          <span class="hint">파일이 다운로드 폴더로 저장됩니다.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <b>알림 또는 "내 파일"에서 받은 APK를 누르세요</b>
+          <span class="hint">처음이면 "이 출처에서 설치 허용" 안내가 뜹니다 — 설정에서 토글 ON 후 뒤로.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <b>설치 누르기</b>
+          <span class="hint">"Play Protect 검사" 떠도 자세히 보기 → 무시하고 설치 OK.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <b>앱 열고 "다른 앱 위에 표시" 권한 허용</b>
+          <span class="hint">권한 화면에서 "업글 타이머" ON → 뒤로.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <b>전체 시간 / 부분 시간 입력 → "타이머 시작"</b>
+          <span class="hint">기본값 30분 / 10분. 빠른 선택 버튼도 있어요.</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>조작법</h2>
+      <ul>
+        <li>동그라미 <b>한 번 누르기</b> = 시작 / 정지</li>
+        <li>동그라미 <b>드래그</b> = 위치 옮기기</li>
+        <li>동그라미 <b>길게 누르기</b> = 설정 화면으로 돌아가기</li>
+        <li>알람 울릴 때 <b>한 번 누르기</b> = 알람 즉시 끔</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>이런 분들께</h2>
+      <ul>
+        <li>유튜브 / 게임 시간을 <b>스스로</b> 조절하고 싶은 분</li>
+        <li>아이의 시청 시간을 옆에서 <b>같이 보고 싶은</b> 부모</li>
+        <li>포모도로 (25-5분) 같은 <b>시간 인터벌</b>로 작업하는 분</li>
+        <li>운동 / 명상 / 단기 집중에 <b>리듬</b>을 잡고 싶은 분</li>
+      </ul>
+    </section>
+
+    <div class="url-display" id="pageUrl"></div>
+
+    <div class="footer">
+      made by <b style="color:#50EBDB">upgul</b><br>
+      이 앱은 유튜브를 차단하지 않습니다 — "잊지 않게 도와주는" 보조 타이머입니다.
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const url = window.location.href.split('#')[0];
+      document.getElementById('pageUrl').textContent = url;
+      const qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=420x420&margin=12&data=' + encodeURIComponent(url);
+      document.getElementById('qr').src = qrSrc;
+    })();
+  </script>
+</body>
+</html>
