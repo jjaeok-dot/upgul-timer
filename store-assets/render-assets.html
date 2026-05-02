@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>업글 타이머 — 스토어 자산 렌더러</title>
+<style>
+  body { background:#1a1a1c; color:#eee; font-family:'Malgun Gothic',sans-serif; margin:0; padding:24px; }
+  h1 { color:#50EBDB; font-size:20px; margin:0 0 4px; }
+  .intro { color:#aaa; font-size:13px; margin-bottom:24px; line-height:1.6; }
+  .intro b { color:#FFDE4A; }
+  .grid { display:grid; gap:24px; }
+  .asset { background:#222; border-radius:14px; padding:18px; }
+  .asset h2 { margin:0 0 4px; color:#50EBDB; font-size:16px; }
+  .asset .dim { color:#888; font-size:12px; margin-bottom:14px; }
+  .preview { background:#0E0E10; border-radius:8px; padding:12px; display:flex; justify-content:center; align-items:center; overflow:hidden; }
+  .preview svg { max-width:100%; max-height:480px; height:auto; }
+  button {
+    background:#50EBDB; color:#0A1414; font-weight:800; border:none;
+    border-radius:10px; padding:12px 22px; font-size:14px; cursor:pointer;
+    margin-top:14px;
+  }
+  button:hover { background:#6df3e3; }
+  .download-all {
+    background:#FFDE4A; padding:14px 30px; font-size:16px; margin: 0 0 24px;
+  }
+</style>
+</head>
+<body>
+  <h1>업글 타이머 v2.0 — Galaxy Store 제출용 자산</h1>
+  <p class="intro">
+    각 자산 옆 <b>PNG 다운로드</b> 버튼을 누르면 해당 PNG 파일이 다운로드됩니다.<br>
+    Galaxy Store 셀러 포털에 그대로 업로드하시면 됩니다.<br>
+    한 번에 받으려면 맨 위 <b>전체 다운로드</b> 버튼.
+  </p>
+
+  <button class="download-all" onclick="downloadAll()">전체 다운로드 (8개 파일)</button>
+
+  <div class="grid">
+
+    <!-- ICON 512x512 -->
+    <div class="asset">
+      <h2>앱 아이콘</h2>
+      <div class="dim">512 × 512 PNG · icon-512.png</div>
+      <div class="preview">
+        <svg id="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+          <rect width="512" height="512" fill="#0E0E10"/>
+          <circle cx="256" cy="256" r="180" fill="none" stroke="#363A3A" stroke-width="22"/>
+          <circle cx="256" cy="256" r="180" fill="none" stroke="#50EBDB" stroke-width="22"
+                  stroke-linecap="round" stroke-dasharray="1131" stroke-dashoffset="320"
+                  transform="rotate(-90 256 256)"/>
+          <circle cx="256" cy="256" r="32" fill="#FFDE4A"/>
+          <rect x="248" y="200" width="16" height="56" fill="#FFFFFF"/>
+          <rect x="256" y="248" width="76" height="14" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <button onclick="dl('svg-icon','icon-512.png',512,512)">PNG 다운로드</button>
+    </div>
+
+    <!-- FEATURE 1280x720 -->
+    <div class="asset">
+      <h2>피처 그래픽 (배너)</h2>
+      <div class="dim">1280 × 720 PNG · feature-1280x720.png</div>
+      <div class="preview">
+        <svg id="svg-feature" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#0E0E10"/>
+              <stop offset="1" stop-color="#1B1C1E"/>
+            </linearGradient>
+            <path id="bp-feat" d="M 380,484 A 200,200 0 0 1 580,484"/>
+          </defs>
+          <rect width="1280" height="720" fill="url(#bg)"/>
+
+          <!-- bubble on left -->
+          <g transform="translate(180,360)">
+            <circle r="245" fill="#111212" stroke="#000" stroke-width="20"/>
+            <circle r="200" fill="none" stroke="#363A3A" stroke-width="16"/>
+            <circle r="200" fill="none" stroke="#50EBDB" stroke-width="16"
+                    stroke-linecap="round" stroke-dasharray="1257" stroke-dashoffset="540"
+                    transform="rotate(-90)"/>
+            <circle cx="184.7" cy="100" r="9" fill="rgba(255,222,74,0.4)"/>
+            <circle cx="-184.7" cy="100" r="9" fill="#FFDE4A"/>
+            <text y="-90" text-anchor="middle" fill="#50EBDB" font-size="46" font-weight="900">실행</text>
+            <text y="20" text-anchor="middle" fill="#fff" font-size="120" font-weight="900" font-family="sans-serif">15:00</text>
+            <text y="80" text-anchor="middle" fill="#FFDE4A" font-size="56" font-weight="900">05:00</text>
+          </g>
+          <text fill="rgba(80,235,219,0.85)" font-size="36" font-weight="800" letter-spacing="2"
+                transform="translate(180 360)">
+            <textPath href="#bp-feat" startOffset="50%" text-anchor="middle">upgul</textPath>
+          </text>
+
+          <!-- right side text -->
+          <text x="540" y="240" fill="#50EBDB" font-size="24" font-weight="800" letter-spacing="6">UPGUL</text>
+          <text x="540" y="330" fill="#FFFFFF" font-size="84" font-weight="900">업글 타이머</text>
+          <text x="540" y="400" fill="#d6d8da" font-size="32" font-weight="500">시간을 주도하는 사람을 위한 앱</text>
+
+          <text x="540" y="490" fill="#9A9DA0" font-size="22">유튜브·게임 위에 떠 있는 동그라미</text>
+          <text x="540" y="528" fill="#9A9DA0" font-size="22">전체 + 부분 사이클 자동 반복 알람</text>
+          <text x="540" y="566" fill="#9A9DA0" font-size="22">탭 한 번으로 알람 끄기</text>
+        </svg>
+      </div>
+      <button onclick="dl('svg-feature','feature-1280x720.png',1280,720)">PNG 다운로드</button>
+    </div>
+
+    <!-- SCREENSHOT 1: bubble on dark phone -->
+    <div class="asset">
+      <h2>스크린샷 1 — 동그라미 타이머</h2>
+      <div class="dim">1080 × 2340 PNG · screenshot-1-bubble.png</div>
+      <div class="preview">
+        <svg id="svg-shot1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 2340" width="1080" height="2340">
+          <rect width="1080" height="2340" fill="#0E0E10"/>
+          <text x="540" y="200" text-anchor="middle" fill="#FFFFFF" font-size="78" font-weight="900">화면 어디든 떠 있는</text>
+          <text x="540" y="300" text-anchor="middle" fill="#50EBDB" font-size="78" font-weight="900">동그라미 타이머</text>
+
+          <!-- bubble centered -->
+          <g transform="translate(540,1200)">
+            <circle r="380" fill="#111212" stroke="#000" stroke-width="28"/>
+            <circle r="320" fill="none" stroke="#363A3A" stroke-width="22"/>
+            <circle r="320" fill="none" stroke="#50EBDB" stroke-width="22"
+                    stroke-linecap="round" stroke-dasharray="2011" stroke-dashoffset="850"
+                    transform="rotate(-90)"/>
+            <circle cx="295" cy="160" r="14" fill="rgba(255,222,74,0.4)"/>
+            <circle cx="-295" cy="160" r="14" fill="#FFDE4A"/>
+            <text y="-160" text-anchor="middle" fill="#50EBDB" font-size="68" font-weight="900">실행</text>
+            <text y="40" text-anchor="middle" fill="#fff" font-size="200" font-weight="900">15:00</text>
+            <text y="130" text-anchor="middle" fill="#FFDE4A" font-size="92" font-weight="900">05:00</text>
+            <defs><path id="bp-s1" d="M -160,260 A 320,320 0 0 1 160,260"/></defs>
+            <text fill="rgba(80,235,219,0.85)" font-size="58" font-weight="800" letter-spacing="3">
+              <textPath href="#bp-s1" startOffset="50%" text-anchor="middle">upgul</textPath>
+            </text>
+          </g>
+
+          <text x="540" y="1820" text-anchor="middle" fill="#9A9DA0" font-size="48">유튜브를 보든, 게임을 하든</text>
+          <text x="540" y="1890" text-anchor="middle" fill="#9A9DA0" font-size="48">언제나 시간이 보입니다</text>
+        </svg>
+      </div>
+      <button onclick="dl('svg-shot1','screenshot-1-bubble.png',1080,2340)">PNG 다운로드</button>
+    </div>
+
+    <!-- SCREENSHOT 2: cycle dots -->
+    <div class="asset">
+      <h2>스크린샷 2 — 사이클 시각화</h2>
+      <div class="dim">1080 × 2340 PNG · screenshot-2-cycles.png</div>
+      <div class="preview">
+        <svg id="svg-shot2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 2340" width="1080" height="2340">
+          <rect width="1080" height="2340" fill="#0E0E10"/>
+          <text x="540" y="200" text-anchor="middle" fill="#FFFFFF" font-size="78" font-weight="900">사이클이 한눈에</text>
+          <text x="540" y="300" text-anchor="middle" fill="#FFDE4A" font-size="78" font-weight="900">노란 점으로 표시</text>
+
+          <g transform="translate(540,1200)">
+            <circle r="380" fill="#111212" stroke="#000" stroke-width="28"/>
+            <circle r="320" fill="none" stroke="#363A3A" stroke-width="22"/>
+            <circle r="320" fill="none" stroke="#50EBDB" stroke-width="22"
+                    stroke-linecap="round" stroke-dasharray="2011" stroke-dashoffset="170"
+                    transform="rotate(-90)"/>
+            <!-- 5 dots: 30/5=6 cycles → 5 dots, all bright (just started) -->
+            <circle cx="231" cy="298" r="18" fill="#FFDE4A"/>
+            <circle cx="370" cy="78"  r="18" fill="#FFDE4A"/>
+            <circle cx="0"   cy="-380" r="18" fill="#FFDE4A"/>
+            <circle cx="-370" cy="78" r="18" fill="#FFDE4A"/>
+            <circle cx="-231" cy="298" r="18" fill="#FFDE4A"/>
+            <text y="-160" text-anchor="middle" fill="#50EBDB" font-size="68" font-weight="900">실행</text>
+            <text y="40" text-anchor="middle" fill="#fff" font-size="200" font-weight="900">29:00</text>
+            <text y="130" text-anchor="middle" fill="#FFDE4A" font-size="92" font-weight="900">04:00</text>
+            <defs><path id="bp-s2" d="M -160,260 A 320,320 0 0 1 160,260"/></defs>
+            <text fill="rgba(80,235,219,0.85)" font-size="58" font-weight="800" letter-spacing="3">
+              <textPath href="#bp-s2" startOffset="50%" text-anchor="middle">upgul</textPath>
+            </text>
+          </g>
+
+          <text x="540" y="1820" text-anchor="middle" fill="#9A9DA0" font-size="48">설정한 부분 시간만큼</text>
+          <text x="540" y="1890" text-anchor="middle" fill="#9A9DA0" font-size="48">전체 시간 끝까지 자동 반복</text>
+        </svg>
+      </div>
+      <button onclick="dl('svg-shot2','screenshot-2-cycles.png',1080,2340)">PNG 다운로드</button>
+    </div>
+
+    <!-- SCREENSHOT 3: settings screen -->
+    <div class="asset">
+      <h2>스크린샷 3 — 설정 화면</h2>
+      <div class="dim">1080 × 2340 PNG · screenshot-3-settings.png</div>
+      <div class="preview">
+        <svg id="svg-shot3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 2340" width="1080" height="2340">
+          <rect width="1080" height="2340" fill="#0E0E10"/>
+          <!-- brand row -->
+          <rect x="80" y="160" width="36" height="36" rx="8" fill="#50EBDB"/>
+          <text x="140" y="194" fill="#50EBDB" font-size="44" font-weight="800" letter-spacing="14">UPGUL</text>
+          <text x="950" y="190" text-anchor="end" fill="#6c6f73" font-size="34">v2.0</text>
+          <!-- title -->
+          <text x="80" y="320" fill="#FFFFFF" font-size="120" font-weight="900">업글 타이머</text>
+          <text x="80" y="400" fill="#9A9DA0" font-size="48">시간을 주도하는 사람을 위한 앱</text>
+
+          <!-- card: 권한 -->
+          <rect x="80" y="500" width="920" height="220" rx="40" fill="#1B1C1E"/>
+          <text x="120" y="580" fill="#FFFFFF" font-size="60" font-weight="800">권한</text>
+          <text x="120" y="660" fill="#50EBDB" font-size="44">✓  '다른 앱 위에 표시' 허용됨</text>
+
+          <!-- card: 전체 시간 -->
+          <rect x="80" y="760" width="920" height="540" rx="40" fill="#1B1C1E"/>
+          <text x="120" y="840" fill="#FFFFFF" font-size="60" font-weight="800">전체 시간</text>
+          <text x="120" y="900" fill="#9A9DA0" font-size="36">아이가 한 번에 사용할 총 시간 (분)</text>
+          <rect x="120" y="940" width="840" height="160" rx="32" fill="#262729"/>
+          <text x="540" y="1056" text-anchor="middle" fill="#FFFFFF" font-size="92" font-weight="700">30</text>
+          <!-- presets -->
+          <g font-size="36" fill="#FFFFFF" font-weight="500">
+            <rect x="120" y="1140" width="148" height="100" rx="24" fill="#262729"/><text x="194" y="1206" text-anchor="middle">15분</text>
+            <rect x="293" y="1140" width="148" height="100" rx="24" fill="#262729"/><text x="367" y="1206" text-anchor="middle">30분</text>
+            <rect x="466" y="1140" width="148" height="100" rx="24" fill="#262729"/><text x="540" y="1206" text-anchor="middle">45분</text>
+            <rect x="639" y="1140" width="148" height="100" rx="24" fill="#262729"/><text x="713" y="1206" text-anchor="middle">60분</text>
+            <rect x="812" y="1140" width="148" height="100" rx="24" fill="#262729"/><text x="886" y="1206" text-anchor="middle">90분</text>
+          </g>
+
+          <!-- card: 부분 시간 -->
+          <rect x="80" y="1340" width="920" height="540" rx="40" fill="#1B1C1E"/>
+          <text x="120" y="1420" fill="#FFFFFF" font-size="60" font-weight="800">부분 시간</text>
+          <text x="120" y="1480" fill="#9A9DA0" font-size="36">부분 알람이 울리는 주기 (분)</text>
+          <rect x="120" y="1520" width="840" height="160" rx="32" fill="#262729"/>
+          <text x="540" y="1636" text-anchor="middle" fill="#FFFFFF" font-size="92" font-weight="700">10</text>
+          <g font-size="36" fill="#FFFFFF" font-weight="500">
+            <rect x="120" y="1720" width="200" height="100" rx="24" fill="#262729"/><text x="220" y="1786" text-anchor="middle">5분</text>
+            <rect x="346" y="1720" width="200" height="100" rx="24" fill="#262729"/><text x="446" y="1786" text-anchor="middle">10분</text>
+            <rect x="572" y="1720" width="200" height="100" rx="24" fill="#262729"/><text x="672" y="1786" text-anchor="middle">15분</text>
+            <rect x="798" y="1720" width="200" height="100" rx="24" fill="#262729"/><text x="898" y="1786" text-anchor="middle">20분</text>
+          </g>
+
+          <!-- start button -->
+          <rect x="80" y="1960" width="920" height="180" rx="42" fill="#50EBDB"/>
+          <text x="540" y="2080" text-anchor="middle" fill="#0A1414" font-size="64" font-weight="900">타이머 시작</text>
+        </svg>
+      </div>
+      <button onclick="dl('svg-shot3','screenshot-3-settings.png',1080,2340)">PNG 다운로드</button>
+    </div>
+
+    <!-- SCREENSHOT 4: tap to silence -->
+    <div class="asset">
+      <h2>스크린샷 4 — 탭으로 알람 끄기</h2>
+      <div class="dim">1080 × 2340 PNG · screenshot-4-silence.png</div>
+      <div class="preview">
+        <svg id="svg-shot4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 2340" width="1080" height="2340">
+          <rect width="1080" height="2340" fill="#0E0E10"/>
+          <text x="540" y="200" text-anchor="middle" fill="#FFFFFF" font-size="78" font-weight="900">알람 울릴 때</text>
+          <text x="540" y="300" text-anchor="middle" fill="#50EBDB" font-size="78" font-weight="900">한 번 누르면 끝</text>
+
+          <!-- bubble with alarm icon ring -->
+          <g transform="translate(540,1200)">
+            <!-- alarm ripple -->
+            <circle r="500" fill="none" stroke="rgba(80,235,219,0.15)" stroke-width="6"/>
+            <circle r="450" fill="none" stroke="rgba(80,235,219,0.25)" stroke-width="6"/>
+            <!-- bubble -->
+            <circle r="380" fill="#111212" stroke="#000" stroke-width="28"/>
+            <circle r="320" fill="none" stroke="#363A3A" stroke-width="22"/>
+            <circle r="320" fill="none" stroke="#50EBDB" stroke-width="22"
+                    stroke-linecap="round" stroke-dasharray="2011" stroke-dashoffset="670"
+                    transform="rotate(-90)"/>
+            <circle cx="295" cy="160" r="14" fill="rgba(255,222,74,0.4)"/>
+            <circle cx="-295" cy="160" r="14" fill="#FFDE4A"/>
+            <text y="-160" text-anchor="middle" fill="#FFDE4A" font-size="68" font-weight="900">알람</text>
+            <text y="40" text-anchor="middle" fill="#fff" font-size="200" font-weight="900">20:00</text>
+            <text y="130" text-anchor="middle" fill="#FFDE4A" font-size="92" font-weight="900">10:00</text>
+            <defs><path id="bp-s4" d="M -160,260 A 320,320 0 0 1 160,260"/></defs>
+            <text fill="rgba(80,235,219,0.85)" font-size="58" font-weight="800" letter-spacing="3">
+              <textPath href="#bp-s4" startOffset="50%" text-anchor="middle">upgul</textPath>
+            </text>
+
+            <!-- finger tap indicator -->
+            <circle cx="0" cy="0" r="60" fill="rgba(255,255,255,0.18)"/>
+            <circle cx="0" cy="0" r="36" fill="rgba(255,255,255,0.30)"/>
+          </g>
+
+          <text x="540" y="1820" text-anchor="middle" fill="#9A9DA0" font-size="48">시끄러울 때 동그라미 한 번 탭</text>
+          <text x="540" y="1890" text-anchor="middle" fill="#9A9DA0" font-size="48">즉시 멈춤</text>
+        </svg>
+      </div>
+      <button onclick="dl('svg-shot4','screenshot-4-silence.png',1080,2340)">PNG 다운로드</button>
+    </div>
+
+  </div>
+
+<script>
+function dl(svgId, filename, w, h) {
+  const svgEl = document.getElementById(svgId);
+  const xml = new XMLSerializer().serializeToString(svgEl);
+  const svg64 = btoa(unescape(encodeURIComponent(xml)));
+  const dataUrl = "data:image/svg+xml;base64," + svg64;
+  const img = new Image();
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(()=>URL.revokeObjectURL(url), 2000);
+    }, 'image/png');
+  };
+  img.src = dataUrl;
+}
+async function downloadAll() {
+  const items = [
+    ['svg-icon','icon-512.png',512,512],
+    ['svg-feature','feature-1280x720.png',1280,720],
+    ['svg-shot1','screenshot-1-bubble.png',1080,2340],
+    ['svg-shot2','screenshot-2-cycles.png',1080,2340],
+    ['svg-shot3','screenshot-3-settings.png',1080,2340],
+    ['svg-shot4','screenshot-4-silence.png',1080,2340],
+  ];
+  for (const [id, name, w, h] of items) {
+    dl(id, name, w, h);
+    await new Promise(r => setTimeout(r, 700));
+  }
+}
+</script>
+</body>
+</html>
